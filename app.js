@@ -21,3 +21,39 @@ document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
 document.getElementById('current-1').textContent = '0';
+
+//add event listener to roll button using click event and anonymous function
+document.querySelector('.btn-roll').addEventListener('click', () => {
+
+  // 1. Generate random number between 1 and 6
+  var dice = Math.floor(Math.random() * 6) + 1;
+
+  // 2. Display the result
+    // First we need show the dice. For that we gonna store the img in a variable
+  var diceDOM = document.querySelector('.dice');
+  diceDOM.style.display = 'block';
+    // Associate the random number to the dice image
+  diceDOM.src = `img/dice-${dice}.png`;
+    // .textContent work just with plain text
+  document.querySelector('#current-' + activePlayer).textContent = dice;
+
+  // 3. Update the round IF the rolled number was NOT a 1
+  if(dice !== 1) {
+    // Increment score to current player
+    roundScore += dice;
+    document.querySelector('#current-' + activePlayer).textContent = roundScore;
+  } else {
+    // Next player
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    // reseting round score
+    roundScore = 0;
+    document.querySelector('#current-0').textContent = roundScore;
+    document.querySelector('#current-1').textContent = roundScore;
+
+    // Toggle class active to active player
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+
+    document.querySelector('.dice').style.display = 'none';
+  }
+})
