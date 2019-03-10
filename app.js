@@ -7,13 +7,14 @@ GAME RULES
 - The first player to reach 100 points on GLOBAL score wins the game
 */
 
-var scores, roundScore, activePlayer;
-
+var scores, roundScore, activePlayer, gamePlaying;
+gamePlaying = false;
 init();
 
 //add event listener to roll button using click event and anonymous function
 document.querySelector('.btn-roll').addEventListener('click', () => {
-
+//checking if gameplay is true
+if(gamePlaying) {
   // 1. Generate random number between 1 and 6
   var dice = Math.floor(Math.random() * 6) + 1;
 
@@ -34,12 +35,15 @@ document.querySelector('.btn-roll').addEventListener('click', () => {
   } else {
     nextPlayer();
   }
+}
+  
 })
 
 // implementing Hold btn
 document.querySelector('.btn-hold').addEventListener('click', () => {
-  
-  var diceDom = document.querySelector('.dice');
+  // checking if the gameplaying is true
+  if(gamePlaying) {
+    var diceDom = document.querySelector('.dice');
   // Add CURRENT score to GLOBAL score
   scores[activePlayer] += roundScore;
 
@@ -52,7 +56,10 @@ document.querySelector('.btn-hold').addEventListener('click', () => {
     
     // Remove active and add winner class
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner'); 
-    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active'); 
+    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    
+    gamePlaying = false;
+    
    
 
     // Hiding dice
@@ -64,8 +71,7 @@ document.querySelector('.btn-hold').addEventListener('click', () => {
     // next player
     nextPlayer();
   }
-  
-  
+  }
 
 })
 
@@ -111,3 +117,7 @@ function init() {
 
   document.querySelector('.player-0-panel').classList.add('active');
 }
+
+document.querySelector('.btn-new').addEventListener('click', () => {
+  gamePlaying ? gamePlaying = false : gamePlaying = true;
+})
