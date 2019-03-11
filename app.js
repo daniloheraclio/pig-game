@@ -17,7 +17,7 @@ document.querySelector('.btn-roll').addEventListener('click', () => {
 if(gamePlaying) {
   // 1. Generate random number between 1 and 6
   var dice = Math.floor(Math.random() * 6) + 1;
-
+  
   // 2. Display the result
     // First we need show the dice. For that we gonna store the img in a variable
   var diceDOM = document.querySelector('.dice');
@@ -121,3 +121,10 @@ function init() {
 document.querySelector('.btn-new').addEventListener('click', () => {
   gamePlaying ? gamePlaying = false : gamePlaying = true;
 })
+
+function rollDice() {
+  
+  let res = setInterval(() => 'hello', 10);
+  console.log(res);
+}
+
