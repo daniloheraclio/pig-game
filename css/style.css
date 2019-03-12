@@ -143,3 +143,16 @@ i {
   font-weight: 600;
   color: #EB4D4D;
 }
+
+.final-score {
+  position: absolute;
+  left: 50%;
+  top: 525px;
+  transform: translateX(-50%);
+  border: 1px solid rgb(156, 156, 156);
+  padding: 8px 10px;
+  width: 60px;
+  font-size: 20px;
+  font-family: 'Lato';
+  text-align: center;
+}
